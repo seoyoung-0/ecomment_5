@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+
+
+{% block content %}
+{% comment %} 게시글 목록 화면  {% endcomment %}
+<div class="container">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            </thead>
+            <tbody>
+             {% for object in object_list %}
+                <tr>
+                    <td><img src="{{ object.image.url }}" alt="..." class="img-thumbnail" width="150px" height="150px"></td>
+                    <th scope="row">{{object.title}}</th>
+                    <td>{{object.text}}</td>
+                    <td><span class="author">작성자:</span> {{object.author}}</td>
+                </tr>
+             {% endfor %}
+        </table>
+    </div>
+</div>
+
+{% endblock %}

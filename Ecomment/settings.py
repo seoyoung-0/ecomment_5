@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'account',
+<<<<<<< HEAD
 
+=======
+    'community',
+>>>>>>> 8789d0b3c56097c2ea5a2fd83b7874ddd6590a09
 ]
 
 MIDDLEWARE = [
@@ -128,4 +132,10 @@ STATICFILES_DIRS = [
 
 # 로그인/로그아웃 성공후 이동하는 URL
 LOGIN_REDIRECT_URL = '/'
+
 LOGOUT_REDIRECT_URL = '/'
+
+
+MEDIA_URL ='/res/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
