@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'home',
     'account',
     'community',
+
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,4 @@ LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL ='/res/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
