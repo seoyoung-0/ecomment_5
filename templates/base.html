@@ -25,7 +25,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav mr-auto">
                    <li class="nav-item">
-                      <a class="nav-link" href="#">친환경 광장</a>
+                      <a class="nav-link" href="{% url 'community:index' %}">친환경 광장</a>
                     </li>
                    <li class="nav-item">
                       <a class="nav-link" href="#">정보/뉴스</a>
@@ -51,10 +51,6 @@
                 </div>
 
               </nav>
-
-            {% if user.is_authenticated %}
-            <h3 style="text-align: center">{{ user.username }}님 로그인되었습니다</h3>
-            {% endif %}
 
             {% block content %}
             {% endblock %}

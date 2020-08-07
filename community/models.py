@@ -1,5 +1,8 @@
+
 from django.db import models
 from django.conf import settings
+from django.forms import forms
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -32,4 +35,9 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created']
         # 모델의 정렬 순서 지정 : 여러개 지정 시 필드 이름을 리스트로 나열 
-        # - 붙으면 내림차순, 기본은 오름차순 
+        # - 붙으면 내림차순, 기본은 오름차순
+
+    def get_absolute_url(self):
+        return reverse('community:list', args=[self.id])
+    # views에서 return super가 나오면 자동으로 이 url이 실행
+    # 왜 안되는거야ㅑㅑㅑㅑㅑqz

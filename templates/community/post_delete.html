@@ -1,0 +1,14 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="alert alert-info" role="alert">
+  {{object.title}}를 지우겠습니까?
+</div>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="submit" value="삭제" class="btn btn-info">
+</form>
+
+{% endblock %}
