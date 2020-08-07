@@ -2,7 +2,9 @@
 {% block title %}
 {% endblock %}
 
+{% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static '/community/list.css' %}">
 {% block content %}
 {% comment %} 게시글 목록 화면  {% endcomment %}
 <div class="container">
@@ -25,4 +27,48 @@
     </div>
 </div>
 
-{% endblock %}
+    {% comment %} <div class="pagination">
+      <span class="page-links">
+        {% if page_obj.has_previous %}
+        <span >
+          <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+        </span>
+        {% endif %}
+        <span class="page-current">
+          <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</p>
+        </span>
+        {% if page_obj.has_next %}
+        <span>
+          <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+        </span>
+        {% endif %}
+      </span>
+    </div> {% endcomment %}
+
+
+    <nav class="full-pagination" aria-label="Page navigation example">
+       <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number}}">Previous</a></li>
+        {% else %}
+            <li class="page-item disabled "><span class="page-link">Previous</span></li>
+        {% endif %}
+        {% for i in paginator.page_range %}
+            {% if page_obj.number == i %}
+            <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only">(current)</span></span></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+        {% else %}
+            <li class="page-item disabled"><span class="page-link">Next</span></li>
+        {% endif %}
+        </ul>
+    </nav>
+    {% comment %} 
+    pagination 전체 가운데정렬 + 부트스트랩 css 수정  
+    {% endcomment %}
+
+{% endblock %} 
