@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Song+Myung&display=swap');
+#home-comment{
+/* Ecommnet 우리들의 친환경이야기 */
+position: absolute;
+width: 800px;
+height: 75px;
+left: 100px;
+top: 303px;
+
+font-family: 'Roboto Slab', serif;
+font-family: 'Song Myung', serif;
+
+font-weight: 500;
+font-size: 50px;
+line-height: 150%;
+color: red;
+/*color: #000000;*/
+}
+
+#home-comment{
+  /* 대한민국의 친환경, 자연주의, 유기농 문화를 만들어갑니다. */
+position: absolute;
+width: 695px;
+height: 36px;
+left: 100px;
+top: 411px;
+
+font-family: 'Roboto Slab', serif;
+font-family: 'Song Myung', serif;
+font-style: normal;
+font-weight: 500;
+font-size: 30px;
+line-height: 36px;
+/* identical to box height, or 120% */
+letter-spacing: -0.015em;
+
+color: #000000;
+}
+/*pagination 가운데 정렬*/
+.pagination{
+display: inline-table;
+}
+.pagination li{
+  display:inline-block;
+}
+.pagination li a{
+  font-weight: normal;
+}
+
