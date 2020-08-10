@@ -38,7 +38,7 @@ class PostUpdate(UpdateView):
 class PostDelete(DeleteView):
     model = Post
     template_name_suffix = '_delete'
-    success_url ='/'
+    success_url ='/community/list'
 
 class PostDetail(DetailView):
     model = Post
