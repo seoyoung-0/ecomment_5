@@ -10,7 +10,7 @@ class PostList(ListView):
     model = Post
     template_name_suffix = '_list'
     context_object_name = 'Posts'
-    paginate_by = 5 
+    paginate_by = 8
     #몇 개씩 나올지 수정하기 
 
 class PostCreate(CreateView):
