@@ -12,7 +12,6 @@ class Category(models.Model):
     class Meta:
         ordering =['name']
 
-
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     title = models.CharField(max_length = 200 )
@@ -22,9 +21,10 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    # like = models.ManyToManyField(User, related_name='list_post', blank=True)
-    # unlike = models.ManyToManyField(User, related_name='list_post', blank=True)
-    # favorite = models.ManyToManyField(User, related_name='favorite_post', blank=True)
+    like = models.ManyToManyField(User, related_name='like_post', blank=True)
+    unlike = models.ManyToManyField(User, related_name='unlike_post', blank=True)
+    favorite = models.ManyToManyField(User, related_name='favorite_post', blank=True)
+    hits = models.PositiveIntegerField(default = 0)
     # # views = models.IntegerField
 
     def __str__(self):
@@ -41,3 +41,7 @@ class Post(models.Model):
         return reverse('community:list', args=[self.id])
     # views에서 return super가 나오면 자동으로 이 url이 실행
     # 왜 안되는거야ㅑㅑㅑㅑㅑqz
+
+    def update_hit(self):
+        self.hits += 1
+        self.save()
