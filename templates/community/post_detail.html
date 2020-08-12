@@ -6,14 +6,18 @@
 {% block content %}
 
 <div class="row">
+  <div class="update_hit">
+  {{ post.update_hit }}
+  </div>
   <div class="col"></div>
   <div class="col-12 col-xl-4 col-md-4">
     <div class="card" style="">
       <img src=" {{ object.image.url }}" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">{{ object.author }}</h5>
-        <p class="card-title">{{ object.title }}</p>
-        <p class="card-title">{{ object.text }}</p>
+        <h5 class="card-title">작성자:{{ object.author }}</h5>
+        <p class="card-title">제목:{{ object.title }}</p>
+        <p class="card-title">내용:{{ object.text }}</p>
+        <p class="card-title">조회수{{ object.hits }}</p>
       </div>
 
       <div class="card-body">
@@ -22,6 +26,14 @@
         <a href="{% url 'community:delete' object.id %}" class="card-link">삭제하기</a>
         {% endif %}
         <a href="#" class="card-link">댓글달기</a>
+      </div>
+      <div class="card-body"
+
+        {% comment %} 공감 비공감 스크랩 버튼은 디테일에서  {% endcomment %}
+
+        <td><a href="{% url 'community:like' object.id %}" class="float-left btn-like {% if user in object.like.all %} active {%endif%}">공감</a>
+        <td><a href="{% url 'community:unlike' object.id %}" class="float-left btn-unlike {% if user in object.unlike.all %} active {%endif%}">비공감</a>
+        <td><a href="{% url 'community:favorite' object.id %}" class="float-left btn-favorite {% if user in object.favorite.all %} active {%endif%}">스크랩</a>
       </div>
     </div>
   </div>

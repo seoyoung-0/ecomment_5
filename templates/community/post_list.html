@@ -17,7 +17,10 @@
                     <th scope="row"><a href="{% url 'community:detail' object.id %}">{{object.title}}</a></th>
                     <td>{{object.created}}</td>
                     <td>{{object.author}}</td>
-                    <td>공감 비공감 조회수</td>
+                    {% comment %} <td>공감 비공감 조회수</td> {% endcomment %}
+                    <td> 공감 <span class=""> {{ object.like.all.count}} </span> </td>
+                    <td> 비공감 <span class=""> {{ object.unlike.all.count}} </span> </td>
+                    <td> 조회수 <span class=""> {{ object.hits }} </span> </td>
                 </tr>
              {% endfor %}
         </table>
