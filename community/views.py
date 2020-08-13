@@ -23,14 +23,18 @@ class PostCreate(CreateView):
     template_name_suffix = '_create'
     success_url ='/community/list'
 
+
     def form_valid(self, form):
         form.instance.author_id = self.request.user.id
         if form.is_valid():
             # 올바르다면
             form.instance.save()
+           # messages.add_message(self.request, messages.INFO, '새 글이 등록되었습니다.')  # 첫번째, 초기지원
+           #  messages.info(self.request, '새 글이 등록되었습니다.')  # 두번째, shortcut 형태
             return redirect('/community/list')
         else:
             # 올바르지 않다면
+            messages.error(self.request, 'Error!')
             return self.render_to_response({'form': form})
 
 class PostUpdate(UpdateView):

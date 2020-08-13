@@ -10,7 +10,7 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            nickname = request.POST["nickname"]
+            first_name = request.POST["first_name"]
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
 
