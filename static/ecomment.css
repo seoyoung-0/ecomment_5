@@ -119,3 +119,19 @@ display: inline-block;
 .update_hit{
   display : none;
 }
+
+.register-text h2, p{
+  font-weight: bold;
+}
+.signUp-box{margin: 50px auto;}
+
+.register-item {
+ margin:3% auto;
+}
+.chk-item{
+padding: 2% 15%;
+}
+
+#register-btn{
+  margin:50px auto; display:block; background: #41965E;
+}
