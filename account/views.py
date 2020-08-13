@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
@@ -22,3 +23,6 @@ def signup(request):
         form = UserForm()
 
     return render(request, 'account/signup.html', {'form': form})
+
+def checkbox(request):
+    return render(request,"account/checkbox.html")
