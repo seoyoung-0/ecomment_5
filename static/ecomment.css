@@ -135,3 +135,8 @@ padding: 2% 15%;
 #register-btn{
   margin:50px auto; display:block; background: #41965E;
 }
+
+.post-footer{
+margin-left:auto; margin-right:0;
+padding: 50px;
+}

@@ -61,6 +61,7 @@ function checkRight() {
         return
     } else {
         // 왜 안뜨는가...
-        alert("필수정보를 확인해주세요!");
+        // alert("필수정보를 확인해주세요!");
+        confirm("2018년에 이루고자 하는 것들을 이루셨나요?");
     }
 }
