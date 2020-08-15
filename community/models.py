@@ -40,7 +40,7 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('community:list', args=[self.id])
     # views에서 return super가 나오면 자동으로 이 url이 실행
-    # 왜 안되는거야ㅑㅑㅑㅑㅑqz
+    # 왜 안되는거야ㅑㅑㅑ
 
     def update_hit(self):
         self.hits += 1
