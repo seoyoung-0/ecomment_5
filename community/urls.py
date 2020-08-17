@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostList, PostDelete, PostCreate, PostUpdate, PostDetail, PostLike, PostUnlike, PostFavorite
+from .views import PostList, PostDelete, PostCreate, PostUpdate, PostDetail, PostLike, PostUnlike, PostFavorite, PostFavoriteList
 
 
 app_name = 'community'
@@ -15,6 +15,8 @@ urlpatterns = [
     path("like/<int:post_id>/",PostLike.as_view(), name='like'),
     path("unlike/<int:post_id>/",PostUnlike.as_view(), name='unlike'),
     path("favorite/<int:post_id>/",PostFavorite.as_view(), name='favorite'),
+
+    path("favorite/",PostFavoriteList.as_view(), name='favorite_list'),
 ]
 
 
