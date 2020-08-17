@@ -128,3 +128,17 @@ class PostFavorite(View):
             return HttpResponseRedirect(path)
 
 
+class PostFavoriteList(ListView):
+    model = Post
+    # template_name ='community/'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.warning(request, '로그인을 먼저하세요')
+            return HttpResponseRedirect('/')
+        return super(PostFavoriteList, self).dispatch(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        user = self.request.user
+        queryset = user.favorite_post.all()
+        return queryset
