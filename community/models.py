@@ -11,6 +11,9 @@ class Category(models.Model):
 
     class Meta:
         ordering =['name']
+    
+    def __str__(self):
+        return self.name
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
