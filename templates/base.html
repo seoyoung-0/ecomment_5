@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/bootstrap.css">
     <link rel="stylesheet" href="{% static 'ecomment.css' %}">
+{#        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">#}
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -40,17 +41,14 @@
 
                   <div class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
-                        <li><a class="nav-link" href="{% url 'account:logout' %}" style="color: #41965E;">{{ user.first_name }}님 로그아웃</a></li>
+                        <li><a class="nav-link" href="{% url 'account:logout' %}"><span style="color: #41965E;">{{ user.first_name }}님  </span>로그아웃</a></li>
 
                    {% else %}
                         <li><a class="nav-link" href="{% url 'account:login' %}" style="color: #41965E;">로그인</a></li>
                         <li><a class="nav-link" href="{% url 'account:checkbox' %}">가입하기</a></li>
                     {% endif %}
                   </div>
-{#                  <form class="form-inline my-2 my-lg-0">#}
-{#                    <input class="form-control m-2" type="search" placeholder="Search" aria-label="Search">#}
-{#                    <button class="btn btn-primary" type="submit">Search</button>#}
-{#                  </form>#}
+
                 </div>
 
               </nav>

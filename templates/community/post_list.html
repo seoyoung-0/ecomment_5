@@ -5,6 +5,17 @@
 {% block content %}
 {% comment %} 게시글 목록 화면  {% endcomment %}
 <div class="container">
+{#<div style="float: right;">#}
+{#  <form class="form-inline">#}
+{#    <input class="form-control m-2" type="search" placeholder="Search" aria-label="Search">#}
+{#    <button class="btn btn-primary" type="submit">Search</button>#}
+{#  </form>#}
+{#</div>#}
+{#  <div class="form-group has-search">#}
+{#    <span class="fa fa-search form-control-feedback"></span>#}
+{#    <input type="text" class="form-control" placeholder="Search">#}
+{#  </div>#}
+
 <!-- Modal -->
 {% if user.is_authenticated %}
     <div class="d-flex"><a class="ml-auto p-3" href="{% url 'community:create' %}">글쓰기</a></div>
@@ -37,7 +48,13 @@
             <tbody>
              {% for object in object_list %}
                 <tr>
-                    <td><a href="{% url 'community:detail' object.id %}"><img src="{{ object.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;"></a></td>
+                    <td><a href="{% url 'community:detail' object.id %}">
+                        {% if object.image %}
+                        <img src="{{ object.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                        {% else %}
+                        <img src="/static/image/garden.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                        {% endif %}
+                    </a></td>
                     <th scope="row"><a href="{% url 'community:detail' object.id %}">{{object.title}}</a></th>
                     <td>{{object.created}}</td>
                     <td>{{object.author}}</td>

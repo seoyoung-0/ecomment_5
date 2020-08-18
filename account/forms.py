@@ -17,3 +17,17 @@ class UserForm(UserCreationForm):
 
     def __str__(self):
         return self.first_name
+
+    def clean_email(self):
+        user_id = self.cleaned_data['username']
+        email = self.cleaned_data['email']
+        obj = User.objects.filter(email=email).exclude(username = user_id)
+        if obj:
+            raise forms.ValidationError('해당 이메일은 이미 존재합니다.')
+    
+    def clean_first_name(self):
+        user_id = self.cleaned_data['username']
+        first_name = self.cleaned_data['first_name']
+        obj = User.objects.filter(first_name=first_name).exclude(username = user_id)
+        if obj:
+            raise forms.ValidationError('해당 닉네임은 이미 존재합니다. 다시 입력해주세요.')

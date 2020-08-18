@@ -9,7 +9,11 @@
       {% csrf_token %}
 
       {{form.as_p}}
-      <input type="submit" value="확인" class="btn btn-info" style="margin:50px auto; display:block; background: #41965E;">
+      <div id="post-option">
+      <a href="{% url 'community:list' %}">닫기</a>
+      <input type="submit" value="저장하기" style="font-weight:bold; border:none; background:none; color:#41965E;">
+      </div>
+
     </form>
   </div>
 
