@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
-
+    slug = models.SlugField(null=True)
     class Meta:
         ordering =['name']
     
@@ -16,12 +16,12 @@ class Category(models.Model):
         return self.name
 
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
-    title = models.CharField(max_length = 200 )
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user',null=True)
+    title = models.CharField(max_length = 200,null=True)
     category = models.ForeignKey(Category, on_delete = models.SET_NULL,null=True, blank=True)
-    text = models.TextField()
+    text = models.TextField(null=True)
     image = models.ImageField(upload_to= 'community/community_photo/%Y/%m/%d',null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True,null=True)
     updated = models.DateTimeField(auto_now=True)
 
     like = models.ManyToManyField(User, related_name='like_post', blank=True)
@@ -31,7 +31,7 @@ class Post(models.Model):
     # # views = models.IntegerField
 
     def __str__(self):
-        return "text:"+self.text
+        return str(self.title)
         # 입력받은 객체의 문자열 버전을 반환하는 함수 
         # 내장 str 클래스 의 생성자 메소드를 실행, 인자로 객체 전달 하는 것 
 
