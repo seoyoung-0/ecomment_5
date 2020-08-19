@@ -20,8 +20,9 @@
         <p class="card-text post-item" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">{{ object.text }}</p>
 
       </div>
-    <img src=" {{ object.image.url }}" style="margin:40px auto; width: 40%;" class="card-img-top" alt="...">
-
+    {% if object.image %}
+    <img src="{{ object.image.url }}" style="margin:40px auto; width: 40%;" class="card-img-top" alt="...">
+    {% endif %}
       <div class="card-body">
         {% if user == object.author %}
         <a href="{% url 'community:update' object.id %}" class="card-link">수정하기</a>

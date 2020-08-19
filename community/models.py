@@ -20,7 +20,7 @@ class Post(models.Model):
     title = models.CharField(max_length = 200 )
     category = models.ForeignKey(Category, on_delete = models.SET_NULL,null=True, blank=True)
     text = models.TextField()
-    image = models.ImageField(upload_to= 'community/community_photo/%Y/%m/%d')
+    image = models.ImageField(upload_to= 'community/community_photo/%Y/%m/%d',null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

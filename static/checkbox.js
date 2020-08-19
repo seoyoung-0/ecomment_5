@@ -56,12 +56,11 @@ var mustchk2 = document.getElementById("mustchk2");
 var mustchk3 = document.getElementById("mustchk3");
 nextBtn.addEventListener("click", checkRight);
 function checkRight() {
-    if(mustchk1.checked==true && mustchk2.checked==true && mustchk3.checked==true) {
+    if(mustchk1.checked==true && mustchk2.checked==true) {
         // 어떻게 처리할지 모르겠음...
-        return
+     alert("다음으로!");
     } else {
         // 왜 안뜨는가...
-        // alert("필수정보를 확인해주세요!");
-        confirm("2018년에 이루고자 하는 것들을 이루셨나요?");
+alert("필수정보를 확인해주세요!");
     }
 }

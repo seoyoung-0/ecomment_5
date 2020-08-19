@@ -15,39 +15,42 @@
     <div class="signUp-box">
     <form method="post" class="post-form">
         {% csrf_token %}
-        {% include "form_errors.html" %}
-        <div class="form-group w-75 register-item">
+        <div class="form-group w-50 register-item">
             <label for="first_name">닉네임</label>
             <input type="text" class="form-control" name="first_name" id="first_name"
-                   placeholder="Enter nickname" value="{{ form.first_name.value|default_if_none:'' }}">
+                   placeholder="닉네임을 입력해주세요" value="{{ form.first_name.value|default_if_none:'' }}">
+        <p class="mt-2" style="font-weight:normal; color:#FF2020; font-size:14px;">{{ form.first_name.errors.as_text }}</p>
         </div>
-        <div class="form-group w-75 register-item">
+        <div class="form-group w-50 register-item">
             <label for="username">아이디</label>
             <input type="text" class="form-control" name="username" id="username"
-                   placeholder="Enter ID" value="{{ form.username.value|default_if_none:'' }}">
+                   placeholder="아이디를 입력해주세요" value="{{ form.username.value|default_if_none:'' }}">
+        <p class="mt-2" style="font-weight:normal; color:#FF2020; font-size:14px;">{{ form.username.errors.as_text }}</p>
         </div>
-        <div class="form-group w-75 register-item">
+        <div class="form-group w-50 register-item">
             <label for="password1">비밀번호</label>
             <input type="password" class="form-control" name="password1" id="password1"
-                   placeholder="Enter password" value="{{ form.password.value|default_if_none:'' }}">
+                   placeholder="비밀번호를 입력해주세요" value="{{ form.password.value|default_if_none:'' }}">
+            <p class="mt-2" style="font-weight:normal; color:#FF2020; font-size:14px;">{{ form.password1.errors.as_text }}</p>
         </div>
-        <div class="form-group w-75 register-item">
+        <div class="form-group w-50 register-item">
             <label for="password2">비밀번호 확인</label>
             <input type="password" class="form-control" name="password2" id="password2"
-                   placeholder="Confirm Password" value="{{ form.password.value|default_if_none:'' }}">
+                   placeholder="비밀번호를 다시 입력해주세요" value="{{ form.password.value|default_if_none:'' }}">
+            <p class="mt-2" style="font-weight:normal; color:#FF2020; font-size:14px;">{{ form.password2.errors.as_text }}</p>
         </div>
-        <div class="form-group w-75 register-item">
+        <div class="form-group w-50 register-item">
             <div class="col-xs-2">
             <label for="email">이메일</label>
             <input type="text" class="form-control" name="email" id="email"
-                   placeholder="Enter your email" value="{{ form.email.value|default_if_none:'' }}">
+                   placeholder="이메일을 입력해주세요" value="{{ form.email.value|default_if_none:'' }}">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <p class="mt-2" style="font-weight:normal; color:#FF2020; font-size:14px;">{{ form.email.errors.as_text }}</p>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-primary" style="margin:80px auto; display:block; background: #41965E;">Ecomment 가입하기</button>
+        <button type="submit" class="btn btn-primary" style="margin:15px auto; display:block; background: #41965E;">Ecomment 가입하기</button>
     </form>
-
 </div>
 </div>
+{#            {% include "account/checkbox.html" %}#}
 {% endblock %}
