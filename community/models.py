@@ -18,7 +18,7 @@ class Category(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user',null=True)
     title = models.CharField(max_length = 200,null=True)
-    category = models.ForeignKey(Category, on_delete = models.SET_NULL,null=True, blank=True)
+    category = models.CharField(max_length=200, default='uncategorized')
     text = models.TextField(null=True)
     image = models.ImageField(upload_to= 'community/community_photo/%Y/%m/%d',null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True,null=True)

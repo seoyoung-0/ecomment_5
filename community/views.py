@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.contrib import messages
 
 from django.core.paginator import Paginator
+from .forms import PostForm
 
 class PostList(ListView):
     model = Post
@@ -19,10 +20,10 @@ class PostList(ListView):
 
 class PostCreate(CreateView):
     model = Post
-    fields = ['title','category','text','image']
-    template_name_suffix = '_create'
+    form_class = PostForm 
+    #fields = ['title','category','text','image']
+    template_name ='community/post_create.html'
     success_url ='/community/list'
-
 
     def form_valid(self, form):
         form.instance.author_id = self.request.user.id

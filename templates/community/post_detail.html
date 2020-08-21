@@ -5,40 +5,40 @@
 
 {% block content %}
 
-<div class="row">
-  <div class="update_hit">
-  {{ post.update_hit }}
-  </div>
-  <div class="col"></div>
-  <div class="col-12">
-    <div class="card" style="width: 80%; margin:20px auto">
+    <div class="row">
+        <div class="update_hit">
+            {{ post.update_hit }}
+        </div>
+        <div class="col"></div>
+        <div class="col-12">
+            <div class="card" style="width: 80%; margin:20px auto">
 
-      <div class="card-body">
-        <h5 class="card-title" style="font-weight:bold;font-family: Noto Sans KR;">제목: {{ object.title }}</h5>
-        <pre class="card-text" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">{{ object.author }}    {{ object.created }}</pre>
-        <pre class="card-text post-item" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">공감 {{ object.like.all.count}}    비공감 {{ object.unlike.all.count}}    조회수 {{ object.hits }}</pre>
-        <p class="card-text post-item" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">{{ object.text }}</p>
+                <div class="card-body">
+                    <h5 class="card-title" style="font-weight:bold;font-family: Noto Sans KR;">제목: {{ object.title }}</h5>
+                    <pre class="card-text" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">{{ object.author }}    {{ object.created }}</pre>
+                    <pre class="card-text post-item" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">공감 {{ object.like.all.count}}    비공감 {{ object.unlike.all.count}}    조회수 {{ object.hits }}</pre>
+                    <p class="card-text post-item" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">{{ object.text }}</p>
 
-      </div>
-    {% if object.image %}
-    <img src="{{ object.image.url }}" style="margin:40px auto; width: 40%;" class="card-img-top" alt="...">
-    {% endif %}
-      <div class="card-body">
-        {% if user == object.author %}
-        <a href="{% url 'community:update' object.id %}" class="card-link">수정하기</a>
-        <a href="{% url 'community:delete' object.id %}" class="card-link">삭제하기</a>
-        {% endif %}
-      </div>
-      <div class="card-body post-footer">
+                </div>
+                {% if object.image %}
+                    <img src="{{ object.image.url }}" style="margin:40px auto; width: 40%;" class="card-img-top" alt="...">
+                {% endif %}
+                <div class="card-body">
+                    {% if user == object.author %}
+                        <a href="{% url 'community:update' object.id %}" class="card-link">수정하기</a>
+                        <a href="{% url 'community:delete' object.id %}" class="card-link">삭제하기</a>
+                    {% endif %}
+                </div>
+                <div class="card-body post-footer">
 
-        {% comment %} 공감 비공감 스크랩 버튼은 디테일에서  {% endcomment %}
-        <a href="{% url 'community:like' object.id %}" class="float-left btn-like {% if user in object.like.all %} active {%endif%}">공감</a>
-        <a href="{% url 'community:unlike' object.id %}" class="float-left btn-unlike {% if user in object.unlike.all %} active {%endif%}">비공감</a>
-        <a href="{% url 'community:favorite' object.id %}" class="float-left btn-favorite {% if user in object.favorite.all %} active {%endif%}">스크랩</a>
-      </div>
+                    {% comment %} 공감 비공감 스크랩 버튼은 디테일에서  {% endcomment %}
+                    <a href="{% url 'community:like' object.id %}" class="float-left btn-like {% if user in object.like.all %} active {%endif%}">공감</a>
+                    <a href="{% url 'community:unlike' object.id %}" class="float-left btn-unlike {% if user in object.unlike.all %} active {%endif%}">비공감</a>
+                    <a href="{% url 'community:favorite' object.id %}" class="float-left btn-favorite {% if user in object.favorite.all %} active {%endif%}">스크랩</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col"></div>
     </div>
-  </div>
-
-  <div class="col"></div>
-</div>
 {% endblock %}

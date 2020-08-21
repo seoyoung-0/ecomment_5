@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import PostList, PostDelete, PostCreate, PostUpdate, PostDetail, PostLike, PostUnlike, PostFavorite, PostFavoriteList
 
-
 app_name = 'community'
 
 urlpatterns = [
