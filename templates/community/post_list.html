@@ -40,7 +40,7 @@
         <table class="table">
             <thead>
             </thead>
-            <tbody>
+
              {% for object in object_list %}
                 <tr>
                     <td><a href="{% url 'community:detail' object.id %}">
@@ -50,13 +50,11 @@
                         <img src="/static/image/garden.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
                         {% endif %}
                     </a></td>
-                    <th scope="row"><a href="{% url 'community:detail' object.id %}">{{object.title}}</a></th>
-                    <td>{{object.created}}</td>
-                    <td>{{object.author}}</td>
-                    {% comment %} <td>공감 비공감 조회수</td> {% endcomment %}
-                    <td> 공감 <span class=""> {{ object.like.all.count}} </span> </td>
-                    <td> 비공감 <span class=""> {{ object.unlike.all.count}} </span> </td>
-                    <td> 조회수 <span class=""> {{ object.hits }} </span> </td>
+                    <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' object.id %}">{{object.title}}</a><br><span style="font-weight: normal">{{object.created}}</span>
+                    <br><span style="display: block;margin-top:15px;color: #000000;font-weight: normal">{{object.author}}</span></th>
+
+                    <td><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 <span> {{ object.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감 <span> {{ object.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ object.hits }} </span></p></td>
+
                 </tr>
              {% endfor %}
         </table>
@@ -64,4 +62,5 @@
 </div>
 {% include 'community/pagination.html' %}
 
+{% include 'footer.html' %}
 {% endblock %} 

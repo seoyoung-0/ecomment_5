@@ -26,3 +26,6 @@ def signup(request):
 
 def checkbox(request):
     return render(request,"account/checkbox.html")
+
+def mypage(request):
+    return render(request,"account/mypage.html")

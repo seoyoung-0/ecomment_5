@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Song+Myung&display=swap');
+div{
+        overflow:hidden;
+        height:auto;
+    }
 #home-comment1{
 /* Ecommnet 우리들의 친환경이야기 */
 /*position: absolute;*/
@@ -6,7 +9,6 @@
 /*height: 75px;*/
 /*left: 100px;*/
 /*top: 303px;*/
-
 /*font-family: 'Roboto Slab', serif;*/
 /*font-family: 'Song Myung', serif;*/
 font-family: Noto Sans KR;

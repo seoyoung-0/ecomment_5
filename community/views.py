@@ -32,8 +32,7 @@ def CategoryView(request,cats):
 
 class PostCreate(CreateView):
     model = Post
-    form_class = PostForm 
-    #fields = ['title','category','text','image']
+    form_class = PostForm
     template_name ='community/post_create.html'
     success_url ='/community/list'
 
@@ -52,7 +51,7 @@ class PostCreate(CreateView):
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title','category','text','image']
+    form_class = PostForm
     template_name_suffix = '_update'
     success_url ='/community/list'
 
