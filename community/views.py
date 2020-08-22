@@ -169,11 +169,12 @@ def comment_create(request, post_id):
             comment.save()
             # return redirect('community:detail', post_id=post.id)
             # return HttpResponseRedirect('/community/detail/')
-            return redirect('community:detail', pk=comment.post.id)
-    else:
-        form = CommentForm()
-    context = {'form': form}
-    return render(request, 'community/comment_form.html', context)
+            return redirect('community:detail', pk=post_id)
+    # else:
+    #     form = CommentForm()
+    # context = {'form': form}
+    # return render(request, 'community/comment_form.html', context)
+    # return render(request, 'community/comment_form.html', context)
 
 def comment_update(request, comment_id):
 
@@ -189,7 +190,8 @@ def comment_update(request, comment_id):
             comment.author = request.user
             comment.updated = timezone.now()
             comment.save()
-            return redirect('community:detail', post_id=comment.post.id)
+            # return redirect('community:detail', post_id=comment.post.id)
+            return redirect('community:detail', pk=comment.post_id)
     else:
         form = CommentForm(instance=comment)
     context = {'form': form}
