@@ -40,6 +40,35 @@
         </div>
 
         <div class="col"></div>
+
+        <!-- 댓글 Start -->
+        <div>
+        <a href="{% url 'community:comment_create' object.id  %}"
+           class="small"><small>댓글 추가 ..</small></a>
+    </div>
+{#    {% include 'community/comment_form.html' %}#}
+    {% if post.comment_set.count > 0 %}
+    <div class="mt-3">
+    {% for comment in post.comment_set.all %}
+        <div class="comment py-2 text-muted">
+            <span style="white-space: pre-line;">{{ comment.content }}</span>
+            <span>
+                - {{ comment.author }}, {{ comment.created }}
+                {% if comment.updated %}
+                (수정:{{ comment.updated }})
+                {% endif %}
+            </span>
+            {% if request.user == comment.author %}
+            <a href="{% url 'community:comment_update' comment.id  %}" class="">수정</a>,
+            <a href="{% url 'community:comment_delete' comment.id  %}" class="">삭제</a>
+{#               data-uri="{% url 'community:comment_delete' comment.id  %}">삭제</a>#}
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- 댓글 End -->
     </div>
 
 {% endblock %}

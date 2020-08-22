@@ -9,7 +9,8 @@ from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.contrib import messages
 
 from django.core.paginator import Paginator
-from .forms import PostForm
+from .forms import PostForm, CommentForm
+
 
 class PostList(ListView):
     model = Post
@@ -154,3 +155,52 @@ class PostFavoriteList(ListView):
         user = self.request.user
         queryset = user.favorite_post.all()
         return queryset
+
+def comment_create(request, post_id):
+
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.created = timezone.now()
+            comment.post = post
+            comment.save()
+            # return redirect('community:detail', post_id=post.id)
+            # return HttpResponseRedirect('/community/detail/')
+            return redirect('community:detail', pk=comment.post.id)
+    else:
+        form = CommentForm()
+    context = {'form': form}
+    return render(request, 'community/comment_form.html', context)
+
+def comment_update(request, comment_id):
+
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user != comment.author:
+        messages.error(request, '댓글수정권한이 없습니다')
+        return redirect('community:detail', post_id=comment.post.id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.updated = timezone.now()
+            comment.save()
+            return redirect('community:detail', post_id=comment.post.id)
+    else:
+        form = CommentForm(instance=comment)
+    context = {'form': form}
+    return render(request, 'community/comment_form.html', context)
+
+def comment_delete(request, comment_id):
+
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user != comment.author:
+        messages.error(request, '댓글삭제권한이 없습니다')
+        return redirect('community:detail', post_id=comment.post_id)
+    else:
+        comment.delete()
+    return redirect('community:detail', pk=comment.post_id)
