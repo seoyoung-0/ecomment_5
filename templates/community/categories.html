@@ -7,9 +7,9 @@
 <div class="container">
 
 <!----Category menu -->
-<div class="col text-center">
+<div class="col text-center my-4">
   {% for item in cat_menu %}
-  <button type="button" class="btn btn-light btn-lg "><a href="{% url 'community:category' item %}"> {{ item }}</button>
+  <a style="font-size: 24px;margin: 6%;" href="{% url 'community:category' item %}"> {{ item }}</a>
   {%endfor%}
 </div>
 <!-- Modal -->
@@ -65,6 +65,6 @@
 
 
 
-{% include 'community/pagination.html' %}
 
+</div>
 {% endblock %}

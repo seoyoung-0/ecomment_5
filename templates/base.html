@@ -19,8 +19,16 @@
     </head>
     <body>
 
-        <div class ="container">
+        <div class ="container" style="flex:1 0 auto">
               <nav class="navbar navbar-expand-lg my-5">
+              <div>
+<svg width="77" height="76" viewBox="0 0 77 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="38.7734" cy="38" r="38" fill="white"/>
+<ellipse cx="38.2734" cy="37.5" rx="28.1429" ry="13.5764" transform="rotate(45 38.2734 37.5)" fill="#41965E"/>
+<path d="M46.3533 30.4581C43.0463 35.1034 43.4122 41.4231 47.2334 45.6557L52.4152 51.3954L46.6755 46.2136C42.4429 42.3924 36.1233 42.0265 31.4779 45.3335C34.785 40.6882 34.419 34.3685 30.5978 30.136L25.416 24.3962L31.1558 29.578C35.3884 33.3992 41.708 33.7651 46.3533 30.4581Z" fill="#F8F7F4"/>
+<path d="M42.5686 58.7142C30.9 52.1042 24.5767 46.2844 17.1508 33.1743C20.1328 42.5635 16.9503 55.9299 11.0635 64.6794C19.4963 58.4759 32.9713 54.9373 42.5686 58.7142Z" fill="#41965E"/>
+</svg>
+</div>
                 <a class="navbar-brand" href="{% url 'home:home' %}"><span style="font-size:larger; color:#41965E;">Ecomment</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,7 +43,7 @@
                       <a class="nav-link" href="#">정보/뉴스</a>
                     </li>
                    <li class="nav-item">
-                      <a class="nav-link" href="#">마이페이지</a>
+                      <a class="nav-link" href="{% url 'account:mypage' %}" href="#">마이페이지</a>
                     </li>
                   </ul>
 
@@ -65,5 +73,6 @@
             {% block content %}
             {% endblock %}
         </div>
+
     </body>
 </html>

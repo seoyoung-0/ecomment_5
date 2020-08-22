@@ -10,11 +10,11 @@ for item in choices:
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields=('author','title','category','text','image',)
+        fields=('title','category','text','image',)
 
         widgets = {
-            'title' : forms.TextInput(attrs={'class':'form-control'}),
-            'category' : forms.Select(choices=choices,attrs={'class':'form-control','placeholder':'choose a category'},),
-            'author' : forms.Select(attrs={'class':'form-control'}),
-            'text': forms.TextInput(attrs={'class':'form-control'}),
+            'title' : forms.TextInput(attrs={'class':'form-control','placeholder': "제목을 입력해 주세요", 'style':'width: 777px;'}),
+            'category' : forms.Select(choices=choices,attrs={'class':'form-control','placeholder':'choose a category', 'style':'width: 112px;'},),
+            'text': forms.Textarea(attrs={'class':'form-control', 'placeholder': "내용을 입력해 주세요", 'style':'width: 777px;',
+            'rows': 15}),
         }
