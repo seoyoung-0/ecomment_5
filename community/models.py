@@ -23,6 +23,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True,null=True)
     updated = models.DateTimeField(auto_now=True)
 
+    # comment = models.ManyToManyField(User, related_name='comment_post', blank=True)
     like = models.ManyToManyField(User, related_name='like_post', blank=True)
     unlike = models.ManyToManyField(User, related_name='unlike_post', blank=True)
     favorite = models.ManyToManyField(User, related_name='favorite_post', blank=True)
@@ -47,3 +48,10 @@ class Post(models.Model):
     def update_hit(self):
         self.hits += 1
         self.save()
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField(max_length = 200,null=True)
+    created = models.DateTimeField(auto_now_add=True,null=True)
+    updated = models.DateTimeField(auto_now=True, null=True, blank=True)
+    post = models.ForeignKey(Post, null=True, blank=True, on_delete=models.CASCADE)

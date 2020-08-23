@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post,Category
+from .models import Post, Category, Comment
 
 #cats= [('cosmetic','cosmetic'),('womens','womens'),('children','children'),('organic','organic')]
 choices = Category.objects.all().values_list('name','name')
@@ -17,4 +17,12 @@ class PostForm(forms.ModelForm):
             'category' : forms.Select(choices=choices,attrs={'class':'form-control','placeholder':'choose a category', 'style':'width: 112px;'},),
             'text': forms.Textarea(attrs={'class':'form-control', 'placeholder': "내용을 입력해 주세요", 'style':'width: 777px;',
             'rows': 15}),
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        labels = {
+            'content': '댓글내용',
         }
