@@ -19,10 +19,12 @@
 }
 </style>
 <div class="col text-center my-4">
-      <a class="now" style="font-size: 20px;margin: 6%;text-decoration : underline;text-underline-position: under; text-decoration-color: #439966;">정책</a>
+
+      <a style="font-size: 20px;margin: 6%;" href="{% url 'news:policy'%}">정책</a>
       <a style="font-size: 20px;margin: 6%;" href="{% url 'news:issue'%}">친환경 이슈</a>
-      <a style="font-size: 20px;margin: 6%;" href="{% url 'news:enterprise'%}">친환경 기업 뉴스 </a>
+      <a style="font-size: 20px;margin: 6%;text-decoration : underline;text-underline-position: under; text-decoration-color: #439966;">친환경 기업 뉴스 </a>
       <a style="font-size: 20px;margin: 6%;" href="{% url 'news:etc'%}">기타</a>
+
 </div>
 {% comment %} 게시글 목록 화면  {% endcomment %}
 <div class="container">
@@ -36,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for item in policy_data %}
+            {% for item in enter_data %}
                 <tr>
                 <td scope="row" class="image">
                     <a href="{{ item.link }}">
