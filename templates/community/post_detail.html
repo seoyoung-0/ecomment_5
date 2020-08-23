@@ -5,12 +5,12 @@
 
 {% block content %}
 
-    <div class="row my-5">
+    <div class="my-5">
         <div class="update_hit">
             {{ post.update_hit }}
         </div>
-        <div class="col"></div>
-        <div class="col-12">
+
+        <div class="">
 {#      테두리 있는 게 더 나은 것 같은뎅..  border-style:none;#}
             <div class="card" style="border-style:none;width: 80%; margin:10px auto">
 
@@ -41,8 +41,35 @@
                 </div>
             </div>
         </div>
+     <!-- 슬릭 슬라이더 -->
 
-        <div class="col"></div>
+<section class="visual" style="margin-left: 10%">
+    <div><img src="/static/image/advertising.png" width="900" height="160" ></div>
+    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+</section>
+    <script>
+    $('.visual').slick(
+        {
+            slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li
+            infinite: true, 	//무한 반복 옵션
+            slidesToShow: 1,		// 한 화면에 보여질 컨텐츠 개수
+            slidesToScroll: 1,		//스크롤 한번에 움직일 컨텐츠 개수
+            speed: 250,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+            arrows: false, 		// 옆으로 이동하는 화살표 표시 여부
+            autoplay: true,			// 자동 스크롤 사용 여부
+            autoplaySpeed: 3000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+            pauseOnHover: true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
+            vertical: false,		// 세로 방향 슬라이드 옵션
+            prevArrow: "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
+            nextArrow: "<button type='button' class='slick-next'>Next</button>",		// 다음 화살표 모양 설정
+            dotsClass: "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
+            draggable: true, 	//드래그 가능 여부
+        });
+    </script>
+
 
         <!-- 댓글 Start -->
 
@@ -63,27 +90,33 @@
     <div class="mt-3" style="float: right;width:80%;margin-left: 20%;">
     {% for comment in post.comment_set.all %}
         <div class="py-2 text-muted mb-4">
+        <img src="/static/image/person.png" width="50" class="mx-3 mt-4">
             <span style="color: #000000;font-size:14px;">
                 <span style="font-weight: bold">{{ comment.author }}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ comment.created }}
                 {% if comment.updated %}
                 (수정:{{ comment.updated }})
                 {% endif %}
                 {% if request.user == comment.author %}
-                 <span style="float: right;margin-right: 15%;">
+                 <span style="float: right;margin-right: 15%;" class="mt-4">
                 <a href="{% url 'community:comment_update' comment.id  %}" class="">수정 </a>
                 <a href="{% url 'community:comment_delete' comment.id  %}" class=""> 삭제</a>
                  </span>
                 {% endif %}
             </span>
-        <p style="margin:8px 0; font-size:14px;color: #000000;font-weight: normal">{{ comment.content }}</p>
-
+        {% if user.is_authenticated %}
+        <p style="margin-left:10%; font-size:14px;color: #000000;font-weight: normal">{{ comment.content }}</p>
+    {% else %}
+            <p style="margin:8px 0; font-size:14px;color: #000000;font-weight: normal">비회원은 접근 권한이 없습니다.</p>
+    {% endif %}
         </div>
 {#        <hr>#}
     {% endfor %}
     </div>
-    {% endif %}
 
+
+{% endif %}
     <!-- 댓글 End -->
     </div>
+
 
 {% endblock %}
