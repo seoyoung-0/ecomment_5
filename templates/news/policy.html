@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<style>
+.title_content{
+    width : 650px;
+}
+.content{
+ font-size : 0.9rem;
+}
+.etc{
+ font-size : 0.8rem;
+}   
+}
+</style>
+
+{% comment %} 게시글 목록 화면  {% endcomment %}
+<div class="container">
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in policy_data %}
+                <tr>
+                <td scope="row">
+                <img src="{{ item.img }}" alt="..." class="img-thumbnail" style="width:180px;height:150px;"></td>
+                <td class="title_content" colspan="3"><a style="color: #000000;">{{ item.title}}</a><br>
+                <p><small class="content">{{ item.content }}</small></p>
+                <p><small class="etc">{{ item.etc }}</small></p>
+                </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+{% include 'community/pagination.html' %}
+
+{% include 'footer.html' %}
+{% endblock %} 
