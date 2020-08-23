@@ -64,18 +64,27 @@ class PostUpdate(UpdateView):
         else:
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
 
-class PostDelete(DeleteView):
-    model = Post
-    template_name_suffix = '_delete'
-    success_url ='/community/list'
+# class PostDelete(DeleteView):
+#     model = Post
+#     template_name_suffix = '_delete'
+#     success_url ='/community/list'
+#
+#     def dispatch(self, request, *args, **kwargs):
+#         object = self.get_object()
+#         if object.author != request.user:
+#             messages.warning(request, '삭제 권한이 없습니다. ')
+#             return HttpResponseRedirect('/community/list')
+#         else:
+#             return super(PostDelete, self).dispatch(request, *args, **kwargs)
+def post_delete(request, post_id):
 
-    def dispatch(self, request, *args, **kwargs):
-        object = self.get_object()
-        if object.author != request.user:
-            messages.warning(request, '삭제 권한이 없습니다. ')
-            return HttpResponseRedirect('/community/list')
-        else:
-            return super(PostDelete, self).dispatch(request, *args, **kwargs)
+    post = get_object_or_404(Post, pk=post_id)
+    if request.user != post.author:
+        messages.error(request, '댓글삭제권한이 없습니다')
+        return redirect('community:detail', post_id=post.post_id)
+    else:
+        post.delete()
+    return redirect('community:list')
 
 class PostDetail(DetailView):
     model = Post

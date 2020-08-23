@@ -58,15 +58,10 @@ display: inline-table;
 }
 
 .btn-like{
-  display: inline-block;
-  width: 66px;
-  height: 25px;
   background:url("image/like.png");
-  background-size: contain;
-  background-position: 800px -400px;
-  text-indent: -9999px;
-  overflow:hidden;
-  border:none;
+   background-repeat: no-repeat;
+   background-size: auto;
+  margin-right: 2px;
 }
 .btn-like.active{
   display: inline-block;

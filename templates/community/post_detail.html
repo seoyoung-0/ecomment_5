@@ -10,13 +10,42 @@
         </div>
 
         <div class="">
-{#      테두리 있는 게 더 나은 것 같은뎅..  border-style:none;#}
+            {#      테두리 있는 게 더 나은 것 같은뎅..  border-style:none;#}
             <div class="card" style="border-style:none;width: 80%; margin:10px auto">
 
                 <div class="card-body">
                     <h5 class="card-title" style="font-weight:bold;font-family: Noto Sans KR;font-size:18px;color: #000000;">제목: {{ object.title }}</h5>
+                    <div class="float-right">
+{% if user.is_authenticated %}
+                        <a href="{% url 'community:like' object.id %}" class="mr-3 float-left">{% if user in object.like.all %} <img src="/static/image/like.png"> {%else%} <img src="/static/image/unlike.png">{% endif %}</a>
+                        <a href="{% url 'community:unlike' object.id %}" class="mr-3 float-left">{% if user in object.unlike.all %} <img src="/static/image/like.png"> {%else%} <img src="/static/image/unlike.png">{% endif %}</a>
+                        <a href="{% url 'community:favorite' object.id %}" class="mr-3 float-left">{% if user in object.favorite.all %} <img src="/static/image/scrab_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a>
+
+                    {% else %}
+                        <a style="cursor:pointer;" data-toggle="modal" data-target="#myModal"><img src="/static/image/like.png"></a>
+                        <a style="cursor:pointer;" data-toggle="modal" data-target="#myModal"><img src="/static/image/unlike.png"></a>
+                        <a style="cursor:pointer;" data-toggle="modal" data-target="#myModal"><img src="/static/image/scrab.png"></a>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">경고</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        비회원은 권한이 없습니다.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div></div>
+                    {% endif %}
+                    </div>
                     <pre class="card-text" style="font-weight: normal;color: #000000;font-size:18px; font-family: Noto Sans KR;">{{ object.author }}    <span style="color: #808080;">{{ object.created }}</span></pre>
                     <pre class="card-text post-item" style="font-weight: normal;color: #000000;font-size:18px;font-family: Noto Sans KR;color: #808080;">공감 {{ object.like.all.count}}    비공감 {{ object.unlike.all.count}}    조회수 {{ object.hits }}</pre>
+
+
                     <br>
                     <br>
                     <p class="card-text post-item" style="font-weight: normal;color: #000000;font-size:14px;font-family: Noto Sans KR;">{{ object.text }}</p>
@@ -33,88 +62,84 @@
                 </div>
                 <div class="card-body post-footer">
 
-                    {% comment %} 공감 비공감 스크랩 버튼은 디테일에서  {% endcomment %}
-                    <a href="{% url 'community:like' object.id %}" class="float-left btn-like {% if user in object.like.all %} active {%endif%}">공감</a>
-                    <a href="{% url 'community:unlike' object.id %}" class="float-left btn-unlike {% if user in object.unlike.all %} active {%endif%}">비공감</a>
-                    <a href="{% url 'community:favorite' object.id %}" class="float-left btn-favorite {% if user in object.favorite.all %} active {%endif%}">스크랩</a>
                 </div>
             </div>
         </div>
-     <!-- 슬릭 슬라이더 -->
+        <!-- 슬릭 슬라이더 -->
 
-<section class="visual" style="margin-left: 10%">
-    <div><img src="/static/image/advertising.png" width="900" height="160" ></div>
-    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
-    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
-    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
-    <div><img src="/static/image/advertising.png" width="900" height="160"></div>
-</section>
-    <script>
-    $('.visual').slick(
-        {
-            slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li
-            infinite: true, 	//무한 반복 옵션
-            slidesToShow: 1,		// 한 화면에 보여질 컨텐츠 개수
-            slidesToScroll: 1,		//스크롤 한번에 움직일 컨텐츠 개수
-            speed: 250,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
-            arrows: false, 		// 옆으로 이동하는 화살표 표시 여부
-            autoplay: true,			// 자동 스크롤 사용 여부
-            autoplaySpeed: 3000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
-            pauseOnHover: true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
-            vertical: false,		// 세로 방향 슬라이드 옵션
-            prevArrow: "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
-            nextArrow: "<button type='button' class='slick-next'>Next</button>",		// 다음 화살표 모양 설정
-            dotsClass: "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
-            draggable: true, 	//드래그 가능 여부
-        });
-    </script>
+        <section class="visual" style="margin-left: 10%">
+            <div><img src="/static/image/advertising.png" width="900" height="160" ></div>
+            <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+            <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+            <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+            <div><img src="/static/image/advertising.png" width="900" height="160"></div>
+        </section>
+        <script>
+            $('.visual').slick(
+                {
+                    slide: 'div',		//슬라이드 되어야 할 태그 ex) div, li
+                    infinite: true, 	//무한 반복 옵션
+                    slidesToShow: 1,		// 한 화면에 보여질 컨텐츠 개수
+                    slidesToScroll: 1,		//스크롤 한번에 움직일 컨텐츠 개수
+                    speed: 250,	 // 다음 버튼 누르고 다음 화면 뜨는데까지 걸리는 시간(ms)
+                    arrows: false, 		// 옆으로 이동하는 화살표 표시 여부
+                    autoplay: true,			// 자동 스크롤 사용 여부
+                    autoplaySpeed: 3000, 		// 자동 스크롤 시 다음으로 넘어가는데 걸리는 시간 (ms)
+                    pauseOnHover: true,		// 슬라이드 이동	시 마우스 호버하면 슬라이더 멈추게 설정
+                    vertical: false,		// 세로 방향 슬라이드 옵션
+                    prevArrow: "<button type='button' class='slick-prev'>Previous</button>",		// 이전 화살표 모양 설정
+                    nextArrow: "<button type='button' class='slick-next'>Next</button>",		// 다음 화살표 모양 설정
+                    dotsClass: "slick-dots", 	//아래 나오는 페이지네이션(점) css class 지정
+                    draggable: true, 	//드래그 가능 여부
+                });
+        </script>
 
 
         <!-- 댓글 Start -->
 
-    <div class="container my-5">
-    <form action="{% url 'community:comment_create' object.id %}" method="post" class="post-form my-3">
-        {% csrf_token %}
-        <div class="form-group">
-            <p style="float: left;margin-left: 10%">댓글 &nbsp&nbsp{{ post.comment_set.count }}개</p>
-            <textarea class="form-control"name="content" id="content" style="float: right;width:70%;margin-right: 10%;"
-                      rows="3" placeholder="댓글 내용">{{ form.content.value|default_if_none:'' }}</textarea>
+        <div class="container my-5">
+            <form action="{% url 'community:comment_create' object.id %}" method="post" class="post-form my-3">
+                {% csrf_token %}
+                <div class="form-group">
+                    <p style="float: left;margin-left: 10%">댓글 &nbsp&nbsp{{ post.comment_set.count }}개</p>
+                    <textarea class="form-control"name="content" id="content" style="float: right;width:70%;margin-right: 10%;"
+                              rows="3" placeholder="댓글 내용">{{ form.content.value|default_if_none:'' }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="font-weight: bold;color: #41965E;background: #F0F0F0;float: right; margin-right: 10%">등록하기</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary" style="font-weight: bold;color: #41965E;background: #F0F0F0;float: right; margin-right: 10%">등록하기</button>
-    </form>
-</div>
 
 
-    {% if post.comment_set.count > 0 %}
-    <div class="mt-3" style="float: right;width:80%;margin-left: 20%;">
-    {% for comment in post.comment_set.all %}
-        <div class="py-2 text-muted mb-4">
-        <img src="/static/image/person.png" width="50" class="mx-3 mt-4">
-            <span style="color: #000000;font-size:14px;">
+        {% if post.comment_set.count > 0 %}
+            <div class="mt-3" style="float: right;width:80%;margin-left: 20%;">
+                {% for comment in post.comment_set.all %}
+                    <div class="py-2 text-muted mb-4">
+                        <img src="/static/image/person.png" width="50" class="mx-3 mt-4">
+                        <span style="color: #000000;font-size:14px;">
                 <span style="font-weight: bold">{{ comment.author }}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ comment.created }}
-                {% if comment.updated %}
-                (수정:{{ comment.updated }})
-                {% endif %}
-                {% if request.user == comment.author %}
-                 <span style="float: right;margin-right: 15%;" class="mt-4">
+                            {% if comment.updated %}
+                                (수정:{{ comment.updated }})
+                            {% endif %}
+                            {% if request.user == comment.author %}
+                                <span style="float: right;margin-right: 15%;" class="mt-4">
                 <a href="{% url 'community:comment_update' comment.id  %}" class="">수정 </a>
                 <a href="{% url 'community:comment_delete' comment.id  %}" class=""> 삭제</a>
                  </span>
-                {% endif %}
+                            {% endif %}
             </span>
-        {% if user.is_authenticated %}
-        <p style="margin-left:10%; font-size:14px;color: #000000;font-weight: normal">{{ comment.content }}</p>
-    {% else %}
-            <p style="margin:8px 0; font-size:14px;color: #000000;font-weight: normal">비회원은 접근 권한이 없습니다.</p>
-    {% endif %}
-        </div>
-{#        <hr>#}
-    {% endfor %}
-    </div>
+                        {% if user.is_authenticated %}
+                            <p style="margin-left:10%; font-size:14px;color: #000000;font-weight: normal">{{ comment.content }}</p>
+                        {% else %}
+                            <p style="margin:8px 0; font-size:14px;color: #000000;font-weight: normal">비회원은 접근 권한이 없습니다.</p>
+                        {% endif %}
+                    </div>
+                    {#        <hr>#}
+                {% endfor %}
+            </div>
 
 
-{% endif %}
-    <!-- 댓글 End -->
+        {% endif %}
+        <!-- 댓글 End -->
     </div>
 
 

@@ -3,64 +3,63 @@
 {% endblock %}
 
 {% block content %}
-{% comment %} 게시글 목록 화면  {% endcomment %}
-<div class="container">
-<!----Category menu -->
-<div class="col text-center my-4">
-  {% for item in cat_menu %}
-      <a style="font-size: 20px;margin: 6%;" href="{% url 'community:category' item %}"> {{ item }}</a>
-  {%endfor%}
-</div>
-<!-- Modal -->
-{% if user.is_authenticated %}
-    <div class="d-flex"><a class="ml-auto p-3" href="{% url 'community:create' %}">글쓰기</a></div>
+    {% comment %} 게시글 목록 화면  {% endcomment %}
+    <div class="container">
+        <!----Category menu -->
+        <div class="col text-center my-4">
+            {% for item in cat_menu %}
+                <a style="font-size: 20px;margin: 6%;" href="{% url 'community:category' item %}"> {{ item }}</a>
+            {%endfor%}
+        </div>
+        <!-- Modal -->
+        {% if user.is_authenticated %}
+            <a style="float: right;margin-bottom:2%;" href="{% url 'community:create' %}">글쓰기</a>
 
 
-{% else %}
-<button type="button" class="btn btn-primary d-flex ml-auto m-2" data-toggle="modal" data-target="#myModal"> 글쓰기 </button>
+        {% else %}
+            <a style="cursor:pointer;float:right;margin-bottom:2%" data-toggle="modal" data-target="#myModal"> 글쓰기 </a>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">경고</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            비회원은 권한이 없습니다.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div></div>
+        {% endif %}
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-          <h5 class="modal-title">경고</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-      <div class="modal-body">
-        비회원은 권한이 없습니다.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                </thead>
+
+                {% for object in object_list %}
+                    <tr>
+                        <td><a href="{% url 'community:detail' object.id %}">
+                            {% if object.image %}
+                                <img src="{{ object.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                            {% else %}
+                                <img src="/static/image/garden.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                            {% endif %}
+                        </a></td>
+                        <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' object.id %}">{{object.title}}</a><br><span style="font-weight: normal">{{object.created}}</span>
+                            <br><span style="display: block;margin-top:15px;color: #000000;font-weight: normal">{{object.author}}</span></th>
+
+                        <td><span><a href="{% url 'community:favorite' object.id %}" class="float-right">{% if user in object.favorite.all %} <img src="/static/image/scrab_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a></span><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 <span> {{ object.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감 <span> {{ object.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ object.hits }} </span></p></td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
-  </div></div>
-{% endif %}
+    {% include 'community/pagination.html' %}
 
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-            </thead>
-
-             {% for object in object_list %}
-                <tr>
-                    <td><a href="{% url 'community:detail' object.id %}">
-                        {% if object.image %}
-                        <img src="{{ object.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
-                        {% else %}
-                        <img src="/static/image/garden.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
-                        {% endif %}
-                    </a></td>
-                    <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' object.id %}">{{object.title}}</a><br><span style="font-weight: normal">{{object.created}}</span>
-                    <br><span style="display: block;margin-top:15px;color: #000000;font-weight: normal">{{object.author}}</span></th>
-
-                    <td><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 <span> {{ object.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감 <span> {{ object.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ object.hits }} </span></p></td>
-
-                </tr>
-             {% endfor %}
-        </table>
-    </div>
-</div>
-{% include 'community/pagination.html' %}
-
-{% include 'footer.html' %}
+    {% include 'footer.html' %}
 {% endblock %} 
