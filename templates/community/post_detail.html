@@ -5,19 +5,22 @@
 
 {% block content %}
 
-    <div class="row">
+    <div class="row my-5">
         <div class="update_hit">
             {{ post.update_hit }}
         </div>
         <div class="col"></div>
         <div class="col-12">
-            <div class="card" style="width: 80%; margin:20px auto">
+{#      테두리 있는 게 더 나은 것 같은뎅..  border-style:none;#}
+            <div class="card" style="border-style:none;width: 80%; margin:10px auto">
 
                 <div class="card-body">
-                    <h5 class="card-title" style="font-weight:bold;font-family: Noto Sans KR;">제목: {{ object.title }}</h5>
-                    <pre class="card-text" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">{{ object.author }}    {{ object.created }}</pre>
-                    <pre class="card-text post-item" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">공감 {{ object.like.all.count}}    비공감 {{ object.unlike.all.count}}    조회수 {{ object.hits }}</pre>
-                    <p class="card-text post-item" style="font-weight: normal;color: #000000;font-family: Noto Sans KR;">{{ object.text }}</p>
+                    <h5 class="card-title" style="font-weight:bold;font-family: Noto Sans KR;font-size:18px;color: #000000;">제목: {{ object.title }}</h5>
+                    <pre class="card-text" style="font-weight: normal;color: #000000;font-size:18px; font-family: Noto Sans KR;">{{ object.author }}    <span style="color: #808080;">{{ object.created }}</span></pre>
+                    <pre class="card-text post-item" style="font-weight: normal;color: #000000;font-size:18px;font-family: Noto Sans KR;color: #808080;">공감 {{ object.like.all.count}}    비공감 {{ object.unlike.all.count}}    조회수 {{ object.hits }}</pre>
+                    <br>
+                    <br>
+                    <p class="card-text post-item" style="font-weight: normal;color: #000000;font-size:14px;font-family: Noto Sans KR;">{{ object.text }}</p>
 
                 </div>
                 {% if object.image %}
@@ -40,6 +43,47 @@
         </div>
 
         <div class="col"></div>
+
+        <!-- 댓글 Start -->
+
+    <div class="container my-5">
+    <form action="{% url 'community:comment_create' object.id %}" method="post" class="post-form my-3">
+        {% csrf_token %}
+        <div class="form-group">
+            <p style="float: left;margin-left: 10%">댓글 &nbsp&nbsp{{ post.comment_set.count }}개</p>
+            <textarea class="form-control"name="content" id="content" style="float: right;width:70%;margin-right: 10%;"
+                      rows="3" placeholder="댓글 내용">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="font-weight: bold;color: #41965E;background: #F0F0F0;float: right; margin-right: 10%">등록하기</button>
+    </form>
+</div>
+
+
+    {% if post.comment_set.count > 0 %}
+    <div class="mt-3" style="float: right;width:80%;margin-left: 20%;">
+    {% for comment in post.comment_set.all %}
+        <div class="py-2 text-muted mb-4">
+            <span style="color: #000000;font-size:14px;">
+                <span style="font-weight: bold">{{ comment.author }}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{{ comment.created }}
+                {% if comment.updated %}
+                (수정:{{ comment.updated }})
+                {% endif %}
+                {% if request.user == comment.author %}
+                 <span style="float: right;margin-right: 15%;">
+                <a href="{% url 'community:comment_update' comment.id  %}" class="">수정 </a>
+                <a href="{% url 'community:comment_delete' comment.id  %}" class=""> 삭제</a>
+                 </span>
+                {% endif %}
+            </span>
+        <p style="margin:8px 0; font-size:14px;color: #000000;font-weight: normal">{{ comment.content }}</p>
+
+        </div>
+{#        <hr>#}
+    {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- 댓글 End -->
     </div>
 
 {% endblock %}
