@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView,CreateView, DeleteView
@@ -215,3 +216,16 @@ def comment_delete(request, comment_id):
     else:
         comment.delete()
     return redirect('community:detail', pk=comment.post_id)
+
+
+def search(request):
+    posts = Post.objects.all().order_by('-id')
+
+    q = request.POST.get('q', "")
+
+    if q:
+        posts = posts.filter(title__icontains=q)
+        return render(request, 'community/search_post.html', {'posts': posts, 'q': q})
+
+    else:
+        return render(request, 'community/search_post.html')

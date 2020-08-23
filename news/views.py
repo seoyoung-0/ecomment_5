@@ -195,3 +195,15 @@ class GetEtcView(View):
         return render(request, 'news/etc.html',{'etc_data' : etc_data})
         # return JsonResponse({'policy_data' : policy_data}, status = 200, json_dumps_params={'ensure_ascii': False})  
         # 결과를 JsonResponse 규격에 맞는 dictionary형태로 return해준다.
+
+def search(request):
+    news = SearchNews.objects.all()
+
+    q = request.POST.get('q', "")
+
+    if q:
+        news = news.filter(title__icontains=q)
+        return render(request, 'news/search_news.html', {'news': news, 'q': q})
+
+    else:
+        return render(request, 'news/search_news.html')

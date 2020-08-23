@@ -11,5 +11,5 @@ urlpatterns = [
     path('issue/',GetIssueView.as_view(), name='issue'),
     path('enterprise/',GetEnterpriseView.as_view(), name='enterprise'),
     path('etc/',GetEtcView.as_view(), name='etc'),
-    
+    path("search/", views.search, name='search'),
 ]

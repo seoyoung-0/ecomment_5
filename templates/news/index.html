@@ -7,7 +7,11 @@
 <link rel="stylesheet" href="{% static 'news.css' %}">
 
 <!-- 정보/ 뉴스 메인 화면 -->
-
+        <form class="form-inline m-5 float-right" action="{% url 'news:search' %}" method="post">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 <div class="container">
     <section class="visual">
         <div><img src="/static/image/advertising.png" width="100%" height="160" ></div>

@@ -16,8 +16,13 @@
 .etc{
  font-size : 0.8rem;
 }   
-}
+
 </style>
+        <form class="form-inline m-5 float-right" action="{% url 'news:search' %}" method="post">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
 <div class="col text-center my-4">
 
       <a style="font-size: 20px;margin: 6%;" href="{% url 'news:policy'%}">정책</a>

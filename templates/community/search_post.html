@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin: 5% auto; width:70%;">
+    <h2 class="my-5 text-center font-weight-bold">친환경 광장 검색결과</h2>
+    {% if not posts %}
+
+        <h3 class="mt-5 text-center">'{{ q }}'에 대한 검색 결과가 없습니다</h3>
+
+    {% else %}
+
+        {% for post in posts.all %}
+        <div class="container my-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.text }}<a href="{% url 'community:detail' post.id %}">...자세히 보기</a></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+    {% endif %}
+</div>
+{% endblock %}

@@ -8,11 +8,13 @@ app_name = 'community'
 urlpatterns = [
     path("", PostList.as_view(), name="index"),
     path("list/",PostList.as_view(), name='list'),
+    path("search/",views.search, name = 'search'),
     path("create/",PostCreate.as_view(), name ='create'),
     # path("delete/<int:pk>/",PostDelete.as_view(), name = 'delete'),
     path("delete/<int:post_id>/",views.post_delete, name = 'delete'),
     path("update/<int:pk>/",PostUpdate.as_view(), name = 'update'),
     path("detail/<int:pk>/",PostDetail.as_view(), name = 'detail'),
+
 
     path("like/<int:post_id>/",PostLike.as_view(), name='like'),
     path("unlike/<int:post_id>/",PostUnlike.as_view(), name='unlike'),
