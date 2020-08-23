@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'home',
     'account',
     'community',
-
+    'news',
 ]
 
 MIDDLEWARE = [
