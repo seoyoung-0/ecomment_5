@@ -12,6 +12,18 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .forms import PostForm, CommentForm
 
+class PostMain(ListView):
+    model = Post
+    template_name='community/post_main.html'
+    cats = Category.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        cat_menu = Category.objects.all()
+        context = super(PostMain,self).get_context_data(*args, **kwargs)
+        context["cat_menu"] = cat_menu
+        return context
+
+
 
 class PostList(ListView):
     model = Post

@@ -34,7 +34,6 @@ def checkbox(request):
 class mypage(View):
     def get(self, request):
         posts = Post.objects.all()
-
         my_posts_list = posts.filter(author = request.user)
         my_posts_list=my_posts_list[:2]
         return render(request, 'account/mypage.html', {'my_posts_list':my_posts_list})

@@ -43,7 +43,7 @@ margin-bottom :  5%;
                             <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' object.id %}">{{object.title}}</a><br><span style="font-weight: normal">{{object.created}}</span>
                                 <br><span style="display: block;margin-top:15px;color: #000000;font-weight: normal">{{object.author}}</span></th>
 
-                            <td><span><a href="{% url 'community:favorite' object.id %}" class="float-right">{% if user in object.favorite.all %} <img src="/static/image/scrab_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a></span><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 <span> {{ object.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감 <span> {{ object.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ object.hits }} </span></p></td>
+                            <td><span><a href="{% url 'community:favorite' object.id %}" class="float-right">{% if user in object.favorite.all %} <img src="/static/image/sc_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a></span><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 <span> {{ object.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감 <span> {{ object.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ object.hits }} </span></p></td>
 
                         </tr>
                     {% endif %}

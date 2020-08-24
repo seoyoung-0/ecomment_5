@@ -89,7 +89,7 @@
                         </a>
                         </td>
                         <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' item.id %}">{{item.title}}</a><br><span style="font-weight: normal">{{item.created}}</span>
-                        <td><span><a href="{% url 'community:favorite' item.id %}" class="float-right">{% if user in item.favorite.all %} <img src="/static/image/scrab_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a></span><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 
+                        <td><span><a href="{% url 'community:favorite' item.id %}" class="float-right">{% if user in item.favorite.all %} <img src="/static/image/sc_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a></span><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 
                         <span> {{ item.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감 <span> {{ item.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ item.hits }} </span></p></td>
 
                     </tr>

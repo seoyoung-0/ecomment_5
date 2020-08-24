@@ -38,32 +38,9 @@
                 </div></div>
         {% endif %}
 
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                </thead>
-
-                {% for object in object_list %}
-                    <tr>
-                        <td><a href="{% url 'community:detail' object.id %}">
-                            {% if object.image %}
-                                <img src="{{ object.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
-                            {% else %}
-                                <img src="/static/image/alt.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
-                            {% endif %}
-                        </a></td>
-                        <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' object.id %}">{{object.title}}</a><br><span style="font-weight: normal">{{object.created}}</span>
-                            <br><span style="display: block;margin-top:15px;color: #000000;font-weight: normal">{{object.author}}</span></th>
-
-                        <td><span><a href="{% url 'community:favorite' object.id %}" class="float-right">{% if user in object.favorite.all %} <img src="/static/image/sc_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a></span><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 <span> {{ object.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감
-                         <span> {{ object.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ object.hits }} </span></p></td>
-
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
+       
     </div>
-    {% include 'community/pagination.html' %}
+    {% comment %} {% include 'community/pagination.html' %} {% endcomment %}
 
     {% include 'footer.html' %}
 {% endblock %} 

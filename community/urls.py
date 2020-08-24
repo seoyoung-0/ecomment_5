@@ -1,12 +1,12 @@
 from django.urls import path
 
 from . import views
-from .views import PostList,  PostCreate, PostUpdate, PostDetail, PostLike, PostUnlike, PostMyList, PostFavorite, PostFavoriteList,CategoryView
+from .views import PostMain, PostList,  PostCreate, PostUpdate, PostDetail, PostLike, PostUnlike, PostMyList, PostFavorite, PostFavoriteList,CategoryView
 # PostDelete,
 app_name = 'community'
 
 urlpatterns = [
-    path("", PostList.as_view(), name="index"),
+    path("", PostMain.as_view(), name="index"),
     path("list/",PostList.as_view(), name='list'),
     path("search/",views.search, name = 'search'),
     path("create/",PostCreate.as_view(), name ='create'),
