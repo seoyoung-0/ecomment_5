@@ -1,19 +1,108 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <p style="font-size:18px;font-weight:bold;margin-bottom: 35px">마이페이지</p>
-    <div>
-        <img src="/static/image/person.png" width="100"style="float: left;" >
-        <div style="display: inline-block" class="mx-3">
-            <h3 style="line-height: 50px; font-weight: bold;color: #000000;">안녕하세요, {{ user.first_name }}님</h3>
-            <div style="display: inline">
-                <br>
-                <p style="line-height: 10%">{{ user.username }}</p>
-                <p>{{ user.email }}</p>
-                <div class="d-flex"><a class="p-3" href="{% url 'community:favorite_list' %}">스크랩한 게시물</a></div>
-            </div>
+    <style>
+    .header{
+        width : 100%;
+        margin : 7% 0;
+    }
+    .second-row{
+        margin-top : 70px;
+        margin-left : 20%;
+        height :300px;
+    }
+    .third-row{
+        margin-top : 40px;
+        margin-left : 20%;
+        height :400px;
+    }
+    .inside-image{
+        display : inline-block;
+        margin : 0 5px;
+        border: 0.8px solid rgba(0, 0, 0, 0.3);
+    }
+    .first{
+    display: inline-block;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #7C7B7A;
+        }
+    .more{
+        display: inline-block;
+        float: right;
+        }
+    .more-text{
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #41965E;
+        }
+</style>
+    <div class="header">
+        <div style="display : inline-block;">
+            <img src="/static/image/person.png" width="147px" height = "147px";style="float: left;" >
+         </div>
+        <div style="display: inline-block; margin-left: 3rem !important; width:360px;" class="mx-3">
+            <h3 style="line-height: 50px; font-weight: bold;color: #000000;">안녕하세요, {{ user.first_name }} 님</h3>
+            {% comment %} <button type="button" class="btn btn-secondary">정보 수정</button> {% endcomment %}
+                <p style="font-size: 18px; line-height: 20px;">{{ user.username }}</p>
+                <p style="font-size: 18px; line-height: 20px;">{{ user.email }}</p>
         </div>
     </div>
-    {% include 'footer.html' %}
+    <hr style="border: 0.6px solid #CDCDCD; margin : 20px 0; width:100%; ">
+    <div class="second-row">
+        <div class="first" style="display: inline-block;">스크랩한 글 </div>
+        <div class="more"><a class="more-text" href="{% url 'community:favorite_list' %}">더보기 </a></div>
+        <p style="font-size: 18px; line-height: 20px;">{{ user.favorite }}</p>
+        <div class="inside-row">
+            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
+            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
+            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
+            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
+        </div>
+    </div>
+
+    <div class="third-row">
+        <div class="first" style="display: inline-block;">내가 작성한 글</div>
+        <div class="more"><a class="more-text" href="{% url 'community:mypost' %}">더보기 </a></div>
+        <table class="table" style="margin-top:20px;">
+                <thead>
+                </thead>
+            {% for item in my_posts_list %}
+                 <tr>
+                        <td><a href="{% url 'community:detail' item.id %}">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                            {% else %}
+                                <img src="/static/image/garden.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                            {% endif %}
+                        </a>
+                        </td>
+                        <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' item.id %}">{{item.title}}</a><br><span style="font-weight: normal">{{item.created}}</span>
+                        <td><span><a href="{% url 'community:favorite' item.id %}" class="float-right">{% if user in item.favorite.all %} <img src="/static/image/scrab_active.png"> {%else%} <img src="/static/image/scrab.png">{% endif %}</a></span><p style="margin-top:65px;float:right; font-weight:normal;font-size:14px;color: #000000;">공감 
+                        <span> {{ item.like.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp비공감 <span> {{ item.unlike.all.count}} </span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp조회수 <span> {{ item.hits }} </span></p></td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+
+
+    <hr style="border: 0.6px solid #CDCDCD; margin : 30px 0; width:100%; ">
+     <section class="visual">
+        <div><img src="/static/image/advertising.png" width="100%" height="160" ></div>
+    </section>
+        {% include 'footer.html' %}
+    </div>
 
 {% endblock %}

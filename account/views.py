@@ -3,6 +3,10 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from account.forms import UserForm
+from django.contrib import messages
+from django.views.generic.base import View
+from django.views.generic.list import ListView
+from community.models import Post
 
 
 def signup(request):
@@ -27,5 +31,11 @@ def signup(request):
 def checkbox(request):
     return render(request,"account/checkbox.html")
 
-def mypage(request):
-    return render(request,"account/mypage.html")
+class mypage(View):
+    def get(self, request):
+        posts = Post.objects.all()
+
+        my_posts_list = posts.filter(author = request.user)
+        my_posts_list=my_posts_list[:2]
+        return render(request, 'account/mypage.html', {'my_posts_list':my_posts_list})
+

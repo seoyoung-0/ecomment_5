@@ -6,7 +6,12 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from news.models import SearchNews
 from django.core.paginator import Paginator
-
+import os
+## Python이 실행될 때 DJANGO_SETTINGS_MODULE이라는 환경 변수에 현재 프로젝트의 settings.py파일 경로를 등록합니다.
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Ecomment.settings")
+## 이제 장고를 가져와 장고 프로젝트를 사용할 수 있도록 환경을 만듭니다.
+import django
+django.setup()
 
 class GetIndexView(View):
     def get(self, request):
@@ -59,8 +64,20 @@ class GetPolicyView(View):
                 }
             )
         return render(request, 'news/policy.html',{'policy_data' : policy_data})
-        # return JsonResponse({'policy_data' : policy_data}, status = 200, json_dumps_params={'ensure_ascii': False})  
-        # 결과를 JsonResponse 규격에 맞는 dictionary형태로 return해준다.
+        #     return policy_data
+
+        # policy_data = policy()
+        # for item in policy_data:
+        #     t = item.get('title')
+        #     l = item.get('link')
+        #     i = item.get('img')
+        #     c = item.get('content')
+        #     e = item.get('etc')
+        #     SearchNews(title=t, link=l,img=i, content=c,etc=e).save()
+
+        # for t,l,i,c,e in policy_data.items():
+        #     SearchNews(title=t, link=l).save()
+            # return render(request, 'news/policy.html',{'policy_data' : policy_data})
 
 class GetIssueView(View):
     def get(self, request):
