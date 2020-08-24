@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.views.generic.base import View
 from django.views.generic.list import ListView
 from community.models import Post
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 
 
 def signup(request):
@@ -31,10 +32,14 @@ def signup(request):
 def checkbox(request):
     return render(request,"account/checkbox.html")
 
+
 class mypage(View):
     def get(self, request):
-        posts = Post.objects.all()
-        my_posts_list = posts.filter(author = request.user)
-        my_posts_list=my_posts_list[:2]
-        return render(request, 'account/mypage.html', {'my_posts_list':my_posts_list})
+        if not request.user.is_authenticated:
+            return HttpResponseForbidden()
+        else:
+            posts = Post.objects.all()
+            my_posts_list = posts.filter(author = request.user)
+            my_posts_list=my_posts_list[:2]
+            return render(request, 'account/mypage.html', {'my_posts_list':my_posts_list})
 

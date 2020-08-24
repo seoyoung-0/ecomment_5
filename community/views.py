@@ -25,13 +25,17 @@ class PostMain(View):
     cats = Category.objects.all()
 
     def get(self, request):
+
+        newer_list = Post.objects.all().order_by('-created')
+        newer_list=newer_list[:3]
+
         like_list = Post.objects.all().order_by('-like')
         like_list = like_list[:4]
 
         watch_list = Post.objects.all().order_by('-hits')
         watch_list = watch_list[:4]
-        print("watch",watch_list)
-        return render(request, 'community/post_main.html', {'like_list':like_list,'watch_list':watch_list})
+  
+        return render(request, 'community/post_main.html', {'like_list':like_list,'watch_list':watch_list, 'newer_list':newer_list})
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
@@ -63,7 +67,7 @@ class PostCreate(CreateView):
     model = Post
     form_class = PostForm
     template_name ='community/post_create.html'
-    success_url ='/community/list'
+    success_url ='/community/'
 
     def form_valid(self, form):
         form.instance.author_id = self.request.user.id
@@ -72,7 +76,7 @@ class PostCreate(CreateView):
             form.instance.save()
            # messages.add_message(self.request, messages.INFO, '새 글이 등록되었습니다.')  # 첫번째, 초기지원
            #  messages.info(self.request, '새 글이 등록되었습니다.')  # 두번째, shortcut 형태
-            return redirect('/community/list')
+            return redirect('/community/')
         else:
             # 올바르지 않다면
             messages.error(self.request, 'Error!')
@@ -82,7 +86,7 @@ class PostUpdate(UpdateView):
     model = Post
     form_class = PostForm
     template_name_suffix = '_update'
-    success_url ='/community/list'
+    success_url ='/community/'
 
     def dispatch(self, request, *args, **kwargs):
         object = self.get_object()
