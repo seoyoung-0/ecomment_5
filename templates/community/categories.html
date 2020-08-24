@@ -16,6 +16,7 @@
                 <a style="font-size: 20px;margin: 6%;" href="{% url 'community:category' item %}"> {{ item }}</a>
             {%endfor%}
         </div>
+
         <!-- Modal -->
         {% if user.is_authenticated %}
             <a style="color:#439966;float: right;margin-bottom:2%;" href="{% url 'community:create' %}">글쓰기</a>
@@ -38,6 +39,7 @@
                     </div>
                 </div></div>
         {% endif %}
+   <a class="write" style="color:#439966;float: right;margin-bottom:2%;" href="{% url 'community:list' %}">전체 목록&nbsp&nbsp</a>
 
         <div class="table-responsive">
             <table class="table">

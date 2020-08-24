@@ -76,7 +76,7 @@ class PostCreate(CreateView):
             form.instance.save()
            # messages.add_message(self.request, messages.INFO, '새 글이 등록되었습니다.')  # 첫번째, 초기지원
            #  messages.info(self.request, '새 글이 등록되었습니다.')  # 두번째, shortcut 형태
-            return redirect('/community/')
+            return redirect('/community/list')
         else:
             # 올바르지 않다면
             messages.error(self.request, 'Error!')
