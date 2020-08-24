@@ -12,17 +12,32 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .forms import PostForm, CommentForm
 
-class PostMain(ListView):
+
+# class mypage(View):
+#     def get(self, request):
+#         posts = Post.objects.all()
+#         my_posts_list = posts.filter(author = request.user)
+#         my_posts_list=my_posts_list[:2]
+#         return render(request, 'account/mypage.html', {'my_posts_list':my_posts_list})
+class PostMain(View):
     model = Post
     template_name='community/post_main.html'
     cats = Category.objects.all()
+
+    def get(self, request):
+        like_list = Post.objects.all().order_by('-like')
+        like_list = like_list[:4]
+
+        watch_list = Post.objects.all().order_by('-hits')
+        watch_list = watch_list[:4]
+        print("watch",watch_list)
+        return render(request, 'community/post_main.html', {'like_list':like_list,'watch_list':watch_list})
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
         context = super(PostMain,self).get_context_data(*args, **kwargs)
         context["cat_menu"] = cat_menu
         return context
-
 
 
 class PostList(ListView):
