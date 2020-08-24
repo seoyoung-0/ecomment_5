@@ -17,11 +17,11 @@ margin-bottom :  5%;
 }
 
 </style>
-    <form class="form-inline m-5 float-right" action="{% url 'community:search' %}" method="post">
-        {% csrf_token %}
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+{#    <form class="form-inline m-5 float-right" action="{% url 'community:search' %}" method="post">#}
+{#        {% csrf_token %}#}
+{#      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{q}}">#}
+{#      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>#}
+{#    </form>#}
 <div class="container">
 
     <div class="myheader">내가 작성한 글</div>
@@ -37,7 +37,7 @@ margin-bottom :  5%;
                                 {% if object.image %}
                                     <img src="{{ object.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
                                 {% else %}
-                                    <img src="/static/image/garden.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                                    <img src="/static/image/alt.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
                                 {% endif %}
                             </a></td>
                             <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' object.id %}">{{object.title}}</a><br><span style="font-weight: normal">{{object.created}}</span>
