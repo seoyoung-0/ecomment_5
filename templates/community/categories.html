@@ -50,7 +50,7 @@
                             {% if object.image %}
                                 <img src="{{ object.image.url }}" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
                             {% else %}
-                                <img src="/static/image/garden.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
+                                <img src="/static/image/alt.png" alt="..." class="img-thumbnail" style="width:100px;height:100px;">
                             {% endif %}
                         </a></td>
                         <th scope="row"><a style="color: #000000;" href="{% url 'community:detail' object.id %}">{{object.title}}</a><br><span style="font-weight: normal">{{object.created}}</span>
