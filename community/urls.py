@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .views import PostList,  PostCreate, PostUpdate, PostDetail, PostLike, PostUnlike, PostFavorite, PostFavoriteList,CategoryView
+from .views import PostList,  PostCreate, PostUpdate, PostDetail, PostLike, PostUnlike, PostMyList, PostFavorite, PostFavoriteList,CategoryView
 # PostDelete,
 app_name = 'community'
 
@@ -20,8 +20,8 @@ urlpatterns = [
     path("unlike/<int:post_id>/",PostUnlike.as_view(), name='unlike'),
     path("favorite/<int:post_id>/",PostFavorite.as_view(), name='favorite'),
 
-    path("favorite/",PostFavoriteList.as_view(), name='favorite_list'),
-
+    path("favorite_list/",PostFavoriteList.as_view(), name='favorite_list'),
+    path("mypost/",PostMyList.as_view(), name='mypost'),
     path('category/<str:cats>/',CategoryView, name='category'),
 
     path('comment/create/<int:post_id>/', views.comment_create, name='comment_create'),

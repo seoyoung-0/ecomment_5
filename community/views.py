@@ -166,6 +166,16 @@ class PostFavoriteList(ListView):
         queryset = user.favorite_post.all()
         return queryset
 
+class PostMyList(ListView):
+    model = Post
+    template_name = 'community/mypost.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.warning(request, '로그인을 먼저하세요! ')
+            return HttpResponseRedirect('/')
+        return super(PostMyList,self).dispatch(request, *args, **kwargs)
+
 def comment_create(request, post_id):
 
     post = get_object_or_404(Post, pk=post_id)
