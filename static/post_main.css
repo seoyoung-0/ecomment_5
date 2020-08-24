@@ -1,4 +1,4 @@
-.header{
+    .header{
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: bold;
@@ -23,9 +23,9 @@
       grid-row-gap: 1em;
     }
     .like_image{
-    width: 280px;
-    height: 280px;
-    border: 0.3px solid rgba(0, 0, 0, 0.4);
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     box-sizing: border-box;
     }
     .title{

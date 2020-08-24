@@ -21,16 +21,19 @@
         margin : 0 5px;
         border: 0.8px solid rgba(0, 0, 0, 0.3);
     }
+    .real-inside{
+        display : inline-block;
+    }
     .first{
-    display: inline-block;
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    color: #7C7B7A;
+        display: inline-block;
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #7C7B7A;
         }
     .more{
         display: inline-block;
@@ -47,14 +50,29 @@
         text-align: center;
         color: #41965E;
         }
+    .btn{
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+        /* identical to box height */
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.015em;
+        color: #808080;
+
+    }
 </style>
     <div class="header">
         <div style="display : inline-block;">
             <img src="/static/image/person.png" width="147px" height = "147px";style="float: left;" >
          </div>
-        <div style="display: inline-block; margin-left: 3rem !important; width:360px;" class="mx-3">
-            <h3 style="line-height: 50px; font-weight: bold;color: #000000;">안녕하세요, {{ user.first_name }} 님</h3>
-            {% comment %} <button type="button" class="btn btn-secondary">정보 수정</button> {% endcomment %}
+        <div style="display: inline-block; margin-left: 3rem !important; width:550px;" class="mx-3">
+            <div style="display:inline-block"><h3 style="line-height: 50px; font-weight: bold;color: #000000;">안녕하세요, {{ user.first_name }} 님 </h3></div>
+            <div style="display:inline-block; width:125px; height:50px;"><button type="button" class="btn" style="background: #F4F4F4;"> 정보 수정</button></div>
                 <p style="font-size: 18px; line-height: 20px;">{{ user.username }}</p>
                 <p style="font-size: 18px; line-height: 20px;">{{ user.email }}</p>
         </div>
@@ -63,12 +81,24 @@
     <div class="second-row">
         <div class="first" style="display: inline-block;">스크랩한 글 </div>
         <div class="more"><a class="more-text" href="{% url 'community:favorite_list' %}">더보기 </a></div>
+
         <p style="font-size: 18px; line-height: 20px;">{{ user.favorite }}</p>
         <div class="inside-row">
-            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
-            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
-            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
-            <div class="inside-image"><img src="/static/image/garden.png" style="height:200px; width:200px"></div>
+        {% for item in scrap_list %}
+        <div class="real-inside">
+            <a href="{% url 'community:detail' item.id %}">
+            <div class="inside-image">
+                
+                 {% if item.image %}
+                    <img src="{{ item.image.url }}" style="height:200px; width:200px">
+                 {% else %}
+                    <img src="/static/image/alt.png" style="height:200px; width:200px">
+                 {% endif %}
+            </div>
+            <p class="scrap_title" style="margin-left:5px;">  {{ item.title }}</p>
+            </a>
+        </div>
+        {% endfor %}
         </div>
     </div>
 

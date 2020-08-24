@@ -34,6 +34,7 @@ def checkbox(request):
 
 
 class mypage(View):
+
     def get(self, request):
         if not request.user.is_authenticated:
             return HttpResponseForbidden()
@@ -41,5 +42,9 @@ class mypage(View):
             posts = Post.objects.all()
             my_posts_list = posts.filter(author = request.user)
             my_posts_list=my_posts_list[:2]
-            return render(request, 'account/mypage.html', {'my_posts_list':my_posts_list})
+
+            user = self.request.user
+            scrap_list = user.favorite_post.all()
+
+            return render(request, 'account/mypage.html', {'my_posts_list':my_posts_list,'scrap_list':scrap_list})
 

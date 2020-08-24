@@ -195,6 +195,7 @@ class PostFavoriteList(ListView):
     def get_queryset(self):
         user = self.request.user
         queryset = user.favorite_post.all()
+        print(queryset)
         return queryset
 
 class PostMyList(ListView):
